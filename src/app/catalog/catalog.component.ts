@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IProduct } from './product.model';
+import { ProductDetailsComponent } from "../product-details/product-details.component";
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   standalone: true,
-  imports: [CommonModule /*, other imports */]
+  imports: [CommonModule /*, other imports */, ProductDetailsComponent]
 })
 export class CatalogComponent {
 
   products : (IProduct | null)[] ;
   filter: string = '';
+  cart : IProduct[] = [];
 
   constructor() {
     // this.product = {
@@ -206,13 +208,12 @@ export class CatalogComponent {
     return this.filter === ''?this.products : this.products.filter((product) => product?.category===this.filter);
   }
     
-  getImageUrl(product: IProduct) {
-    return '/assets/images/robot-parts/'+ product.imageName
+ addToCart(product: IProduct) {
+    this.cart.push(product);
+    console.log(`Product ${product.name} added to cart. Cart now has ${this.cart.length} items.`);
   }
 
-  getDiscountedClasses(product: IProduct){
-    if(product.discount > 0) return 'strikethrough';
-    else return '';
-    
-  }
+ 
+
+ 
 }

@@ -8,26 +8,8 @@
   </div>
 
   <ul class="products">
-    <li class="product-item" *ngFor="let product of getFilteredProducts()">
-      <div class="product">
-        <div class="product-details">
-          <img *ngIf="product" [src]="getImageUrl(product)" [alt]="product.name" />
-          <div class="product-info">
-            <div class="name">{{product?.name}}</div>
-            <div class="description">{{product?.description}}</div>
-            <div class="category">Part Type: {{product?.category}} </div>
-          </div>
-        </div>
-        <div class="price">
-          <div [ngClass]=" getDiscountedClasses(product!) ">
-            ${{product?.price | currency : 'GBP'}}
-          </div>
-          <div *ngIf="product?.discount! > 0" class="discount">
-            {{product!.price * (1 - product!.discount) | currency : 'GBP'}}
-          </div>
-          <button class="cta">Buy</button>
-        </div>
-      </div>
+    <li class="product-item" *ngFor="let currentProduct of getFilteredProducts()">
+     <app-product-details [product]="currentProduct!" (buy)="addToCart(currentProduct!)"></app-product-details>
     </li>
   </ul>
 </div>
