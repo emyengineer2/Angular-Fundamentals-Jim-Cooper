@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { IProduct } from './product.model';
 import { ProductDetailsComponent } from "../product-details/product-details.component";
+import { CartService } from '../cart.service';
 
 @Component({
   selector: 'app-catalog',
@@ -15,8 +16,10 @@ export class CatalogComponent {
   products : (IProduct | null)[] ;
   filter: string = '';
   cart : IProduct[] = [];
+  //Another way to Inject the Service
+  //private cartService: CartService= inject(CartService);
 
-  constructor() {
+  constructor(private cartService: CartService) {
     // this.product = {
     //   id: 1,
     //   name: 'Eman Robot',
@@ -26,7 +29,7 @@ export class CatalogComponent {
     //   category: 'Home Assistant',
     //   discount: 0.2
     // };
-
+   
     this.products = [
   {
     id: 1,
@@ -209,8 +212,7 @@ export class CatalogComponent {
   }
     
  addToCart(product: IProduct) {
-    this.cart.push(product);
-    console.log(`Product ${product.name} added to cart. Cart now has ${this.cart.length} items.`);
+    this.cartService.add(product);
   }
 
  
