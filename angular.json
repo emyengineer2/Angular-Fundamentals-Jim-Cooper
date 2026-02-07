@@ -64,7 +64,9 @@
               "buildTarget": "eman-robot-shop:build:production"
             },
             "development": {
-              "buildTarget": "eman-robot-shop:build:development"
+              "buildTarget": "eman-robot-shop:build:development",
+              "proxyConfig": "src/proxy.conf.json"
+
             }
           },
           "defaultConfiguration": "development"
