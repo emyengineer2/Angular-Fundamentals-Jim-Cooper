@@ -4,18 +4,19 @@ import { IProduct } from './product.model';
 import { ProductDetailsComponent } from "../product-details/product-details.component";
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   standalone: true,
-  imports: [CommonModule /*, other imports */, ProductDetailsComponent]
+  imports: [CommonModule /*, other imports */, ProductDetailsComponent, RouterLink]
 })
 export class CatalogComponent {
 
-  products : any ;
+  products : IProduct[] = [];
   filter: string = '';
   cart : IProduct[] = [];
   //Another way to Inject the Service
@@ -23,7 +24,8 @@ export class CatalogComponent {
 
   constructor(private cartService: CartService, 
     private productService: ProductService,
-    private router: Router
+    private router: Router,
+    private route: ActivatedRoute
   ) {
     this.productService.getProducts().subscribe(products => {
       this.products = products;
@@ -31,16 +33,26 @@ export class CatalogComponent {
   }
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(products => {
-      this.products = products;
-    });
-
+    // this.productService.getProducts().subscribe(products => {
+    //   this.products = products;
+    // });
+    this.route.snapshot.params['filter'] ? this.filter = this.route.snapshot.params['filter'] : this.filter = '';
   }
 
-  getFilteredProducts(){
-    return this.filter === ''?this.products : this.products.filter((product: { category: string; }) => product?.category===this.filter);
+  // getFilteredProducts(){
+  //   return this.filter === ''?this.products : this.products.filter((product: { category: string; }) => product?.category===this.filter);
+  // }
+     getFilteredProducts(): IProduct[] {
+    if (!this.products.length) {          // still loading
+      return [];
+    }
+    if (!this.filter) {                   // no filter, return all
+      return this.products;
+    }
+    return this.products.filter(
+      prod => prod.category === this.filter
+    );
   }
-    
  addToCart(product: IProduct) {
     this.cartService.add(product);
     this.router.navigate(['/cart']);
