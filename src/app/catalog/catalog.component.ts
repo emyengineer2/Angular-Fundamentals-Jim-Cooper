@@ -4,7 +4,7 @@ import { IProduct } from './product.model';
 import { ProductDetailsComponent } from "../product-details/product-details.component";
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
-import { Router, RouterLink } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   templateUrl: './catalog.component.html',
   styleUrls: ['./catalog.component.css'],
   standalone: true,
-  imports: [CommonModule /*, other imports */, ProductDetailsComponent, RouterLink]
+  imports: [CommonModule /*, other imports */, ProductDetailsComponent, RouterLink, RouterLinkActive]
 })
 export class CatalogComponent {
 
@@ -37,7 +37,7 @@ export class CatalogComponent {
     //   this.products = products;
     // });
     //this.route.snapshot.params['filter'] ? this.filter = this.route.snapshot.params['filter'] : this.filter = '';
-    this.route.params.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
       this.filter = params['filter'] || '';
     });
   }

@@ -14,10 +14,10 @@ export const routes: Routes = [
     component: CatalogComponent,
     title: 'Catalog Page for Eman Robot Shopcd'
   },
-  {path: 'catalog/:filter',
-    component: CatalogComponent,
-    title: 'Catalog Page for Eman Robot Shopcd'
-  },
+  // {path: 'catalog/:filter',
+  //   component: CatalogComponent,
+  //   title: 'Catalog Page for Eman Robot Shopcd'
+  // },
   {path: 'cart',
     component: CartComponent,
     title: 'Cart Page for Eman Robot Shopcd'
