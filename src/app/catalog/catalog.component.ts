@@ -4,6 +4,7 @@ import { IProduct } from './product.model';
 import { ProductDetailsComponent } from "../product-details/product-details.component";
 import { CartService } from '../cart/cart.service';
 import { ProductService } from './product.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-catalog',
@@ -20,7 +21,10 @@ export class CatalogComponent {
   //Another way to Inject the Service
   //private cartService: CartService= inject(CartService);
 
-  constructor(private cartService: CartService, private productService: ProductService) {
+  constructor(private cartService: CartService, 
+    private productService: ProductService,
+    private router: Router
+  ) {
     this.productService.getProducts().subscribe(products => {
       this.products = products;
     });
@@ -39,6 +43,7 @@ export class CatalogComponent {
     
  addToCart(product: IProduct) {
     this.cartService.add(product);
+    this.router.navigate(['/cart']);
   }
 
  
