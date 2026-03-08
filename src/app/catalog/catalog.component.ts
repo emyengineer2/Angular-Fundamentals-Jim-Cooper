@@ -36,7 +36,10 @@ export class CatalogComponent {
     // this.productService.getProducts().subscribe(products => {
     //   this.products = products;
     // });
-    this.route.snapshot.params['filter'] ? this.filter = this.route.snapshot.params['filter'] : this.filter = '';
+    //this.route.snapshot.params['filter'] ? this.filter = this.route.snapshot.params['filter'] : this.filter = '';
+    this.route.params.subscribe(params => {
+      this.filter = params['filter'] || '';
+    });
   }
 
   // getFilteredProducts(){
