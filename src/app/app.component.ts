@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from "./home/home.component";
 import { CatalogComponent } from "./catalog/catalog.component";
@@ -9,12 +9,14 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from '@angular/router';   // <<– import this
                                                       // call forRoot/forCh
 import { AppRoutingModule } from './app.routes';  // <<– add this
+import { SignInComponent } from './user/sign-in/sign-in.component';
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, CatalogComponent, SiteHeaderComponent, CartComponent],
+  imports: [RouterOutlet, HomeComponent, CatalogComponent, SiteHeaderComponent, CartComponent, SignInComponent],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.css'
+  styleUrls: ['./app.component.css']
 })
 export class AppComponent {
   title = 'eman-robot-shop';

@@ -3,6 +3,7 @@ import { HomeComponent } from './home/home.component';
 import { NgModule } from '@angular/core';
 import { CatalogComponent } from './catalog/catalog.component';
 import { CartComponent } from './cart/cart.component';
+import { SignInComponent } from './user/sign-in/sign-in.component';
 
 export const routes: Routes = [
   //{ path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -21,6 +22,10 @@ export const routes: Routes = [
   {path: 'cart',
     component: CartComponent,
     title: 'Cart Page for Eman Robot Shopcd'
+  },
+  {path: 'sign-in',
+    component: SignInComponent,
+    title: 'Sign In Page for Eman Robot Shopcd'
   },
   //{ path: '', redirectTo: '/home', pathMatch: 'prefix' }
   { path: '', redirectTo: '/home', pathMatch: 'full' }
