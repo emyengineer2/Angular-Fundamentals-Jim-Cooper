@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { IUserCredentials } from '../user.model';
+import { UserService } from '../user.service';
+import { Router } from '@angular/router';
 
 @Component({
   standalone: true,
@@ -15,5 +17,19 @@ export class SignInComponent {
     password: '',
   };
 
-  constructor() {}
+  constructor(private userService: UserService, private router: Router) {}
+
+  signIn() {
+    this.userService.signIn(this.credentials).subscribe({
+      next: (user) => {
+        console.log('User signed in:', user);
+        this.router.navigate(['/catalog']);
+      },
+      error: (error) => {
+        console.error('Sign-in failed:', error);
+      },
+    });
+  }
+
+
 }
