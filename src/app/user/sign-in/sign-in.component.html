@@ -1,24 +1,33 @@
 <div class="container">
-  <form class="form"  (ngSubmit)="signIn()">
+  <form #signInForm="ngForm" class="form"  (ngSubmit)="signIn()">
     <img class="logo" src="/assets/images/logo.png" />
     <div class="sign-in">Sign In</div>
     <div class="sub-text">to acquire awesome bots</div>
     <input
       name="email"
-      #myInput="ngModel"
+      required
+      email
+      #email="ngModel"
       [(ngModel)]="credentials.email"
       placeholder="Email Address"
       type="text"
     />
-    {{myInput.value}}
+    <em class="error" *ngIf="email.invalid"> Email is Required</em>
+    {{email.value}}
     {{credentials.email}}
     <input
       name="password"
+      required
+      minlength="6"
       #passwordInput="ngModel"
       [(ngModel)]="credentials.password"
       placeholder="Password"
       type="password"
     />
+     <em class="error" *ngIf="passwordInput.invalid"> 
+      Password is Required and must be at least 6 characters</em> 
+    {{passwordInput.value}}
+    {{credentials.password}}
     <div class="buttons">
       <button type="submit"class="button cta">
         Sign In
@@ -29,6 +38,31 @@
        <div class="register-link">
         Don't have an account?
         <a routerLink="/register">Register here</a>
+      </div>
+      <div class="form-info">
+        <b> Form Information  </b><br/>
+        <br/>
+        <label>signInForm.valid</label> {{signInForm.valid}} <br/>
+        <label>signInForm.invalid</label> {{signInForm.invalid}} <br/>
+        <br/>
+        <label>signInForm.dirty:</label> {{signInForm.dirty}} <br/>
+        <label>signInForm.pristine:</label> {{signInForm.pristine}} <br/>
+        <br/>
+        <label>signInForm.touched:</label> {{signInForm.touched}} <br/>
+        <label>signInForm.untouched:</label> {{signInForm.untouched}} <br/>
+        <br/>
+        <label>signInForm.submitted:</label> {{signInForm.submitted}} <br/>
+      </div>
+      <div>
+        <b>Email Information Control</b>
+        <label>email.valid</label> {{email.valid}} <br/>
+        <label>email.invalid</label> {{email.invalid}} <br/>
+        <br/>
+        <label>email.dirty:</label> {{email.dirty}} <br/>
+        <label>email.pristine:</label> {{email.pristine}} <br/>
+        <br/>
+        <label>email.touched:</label> {{email.touched}} <br/>
+        <label>email.untouched:</label> {{email.untouched}} <br/>
       </div>
   </form>
 </div>
