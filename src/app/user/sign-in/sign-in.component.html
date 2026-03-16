@@ -12,7 +12,8 @@
       placeholder="Email Address"
       type="text"
     />
-    <em class="error" *ngIf="email.invalid && email.touched"> Email is Required</em>
+    <em class="error" *ngIf="email.errors?.['required'] && email.touched"> Email is Required</em>
+    <em class="error" *ngIf="email.errors?.['email'] && email.touched"> Must be a valid email address</em>
     {{email.value}}
     {{credentials.email}}
     <input
